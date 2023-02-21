@@ -4,10 +4,12 @@ UnionFind.__index = UnionFind
 function UnionFind.new(n)
     local parent = {}
     for i = 1, n do
-        parent[string.char(64 + i)] = string.char(64 + i)
+        parent[i] = i
+        --parent[string.char(64 + i)] = string.char(64 + i)
     end
     return setmetatable({
-        parent = parent
+        parent = parent,
+        size = n
     }, UnionFind)
 end
 
@@ -21,7 +23,14 @@ end
 function UnionFind:union(i, j)
     local parent_i = self:find(i)
     local parent_j = self:find(j)
-    self.parent[parent_i] = parent_j
+    if parent_j ~= parent_i then
+        self.size = self.size - 1
+        self.parent[parent_i] = parent_j
+    end
+end
+
+function UnionFind:getSize()
+    return self.size
 end
 
 return UnionFind
