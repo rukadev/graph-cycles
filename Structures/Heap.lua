@@ -90,7 +90,11 @@ function Heap:Print()
 end
 
 function Heap:isEmpty()
-    
+    return self.size == 0
+end
+
+function Heap:getSize()
+    return self.size
 end
 
 return Heap

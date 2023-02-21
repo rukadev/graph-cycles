@@ -1,4 +1,4 @@
-local Heap = require("Heap")
+local Heap = require("./Structures/Heap")
 
 local PriorityQueue = {}
 PriorityQueue.__index = PriorityQueue
@@ -16,15 +16,22 @@ function PriorityQueue:insertWithPriority(v, p)
 end
 
 function PriorityQueue:pullHighestPriority()
-    local highest = self.heap:getMin()
-    local mapped = self.map[highest]
-    for _, element in pairs(mapped) do
-        print("element :", element)
-    end
+    local p = self.heap:getMin()
+    self.heap:remove()
+    local v = self.map[p]
+    return v, p
+end
+
+function PriorityQueue:peekHighestPriority()
+    
 end
 
 function PriorityQueue:isEmpty()
     return self.heap:isEmpty()
+end
+
+function PriorityQueue:getSize()
+    return self.heap:getSize()
 end
 
 function PriorityQueue:changePriority()

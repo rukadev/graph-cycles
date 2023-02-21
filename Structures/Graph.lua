@@ -1,22 +1,41 @@
 local Graph = {}
 Graph.__index = Graph
 
+local Edge = {}
+Edge.__index = Edge
+
+function Edge.new(from, to, cost)
+    return {
+        from = from,
+        to = to,
+        cost = cost
+    }
+end
+
 function Graph.new()
     local self = {}
     self.edges = {}
-    self.vertices = {4,2,3,1}
-    self.adj = {
-        [1] = {2},
-        [2] = {3,4},
-        [3] = {4},
-        [4] = {}
-    }
+    self.vertices = {}
+    self.adj = {}
 
     return setmetatable(self, Graph)
 end
 
-function Graph:addEdge(edge)
-    table.insert(self.edges, edge)
+function Graph:addEdge(from, to, cost)
+    table.insert(self.edges, Edge.new(from, to, cost))
+end
+
+function Graph:createAdjacency()
+    for _, edge in pairs(self.edges) do
+        if not self.adj[edge.from] then
+            self.adj[edge.from] = {}
+        end
+        if not self.adj[edge.to] then
+            self.adj[edge.to] = {}
+        end
+        table.insert(self.adj[edge.from], edge.to)
+        table.insert(self.adj[edge.to], edge.from)
+    end
 end
 
 function Graph:addVertex(vertex, adj)
