@@ -1,4 +1,3 @@
-# graph-cycles
-A module for finding cycles/simple cycles in a graph
-
-Also implementing different helper data structures
+# Algorithms + Data Structures
+Originally this repo was intended for graph theory problems, but I'm now using it to practice other algorithm implmentations as well.
+Proper renaming will come soon once more is added.
